@@ -2,18 +2,65 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using mvc_app.Models;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace mvc_app.Controllers
 {
-    public class MoviesController : Controller
+    [Route("api/[controller]")]
+    [ApiController]
+
+    public class MovieController : Controller
     {
-        // GET: /<controller>/
-        public IActionResult Index()
+        private readonly Models.MovieRepository movieRepository;
+
+        public MovieController()
         {
-            return View();
+            movieRepository = new Models.MovieRepository();
+        }
+
+        [HttpGet]
+
+        public IEnumerable<Movie> Get()
+        {
+            return movieRepository.GetAllMovies();
+        }
+
+        [HttpGet("{id}")]
+
+        public Movie Get(int id)
+        {
+            return movieRepository.GetByID(id);
+        }
+
+        [HttpPost]
+
+        public void post([FromBody] Movie movie)
+        {
+          if (ModelState.IsValid)
+            {
+                movieRepository.Add(movie);
+            }
+        }
+
+        [HttpPut("{id}")]
+        public void Put(int id, [FromBody] Movie newMovie)
+        {
+            newMovie.MovieID = id;
+            if (ModelState.IsValid)
+            {
+                movieRepository.UpdateMovies(newMovie);
+            }
+        }
+
+        [HttpDelete]
+
+        public void Delete(int id)
+        {
+            movieRepository.DeleteByID(id);
         }
     }
 }

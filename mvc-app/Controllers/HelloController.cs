@@ -13,7 +13,24 @@ namespace mvc_app.Controllers
         // GET: /<controller>/
         public IActionResult Index()
         {
-            return View();
+            return View(); //Index() speaks to a file with the same name as our
+            //views folder.
+            //views/Hello: by default, it looks for index... just like any web server
+            //View the name of the method
         }
+
+        //GET: /HELLO/
+        //public IActionResult Wassup() //our home for the controller
+        //{
+        //    return Wassup();
+        //}
+
+        //GET: /HELLO/WASSUP
+        //public string Wassup(string name, int ID) // sub-view of out hello controller
+        //{
+        //    name = "Adam";
+        //    ID = 1;
+        //    return HtmlEncoder.Default.Encode($"Hello, {name} your ID is {ID}");
+        //}
     }
 }

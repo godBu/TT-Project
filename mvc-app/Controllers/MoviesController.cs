@@ -47,6 +47,7 @@ namespace mvc_app.Controllers
         }
 
         [HttpPut("{id}")]
+
         public void Put(int id, [FromBody] Movie newMovie)
         {
             newMovie.MovieID = id;
@@ -62,5 +63,19 @@ namespace mvc_app.Controllers
         {
             movieRepository.DeleteByID(id);
         }
+
+        //[Route("Error/{statusCode}")]
+
+        //public IActionResult HttpStatusCodeHandler(int statusCode)
+        //{
+        //    switch (statusCode)
+        //    {
+        //        case 404:
+        //            ViewBag.ErrorMessage = "Smashed it!";
+        //            break;
+        //    }
+
+        //    return View("NotFound");
+        //}
     }
 }

@@ -7,12 +7,9 @@
 
   <ItemGroup>
     <Folder Include="Views\Hello\" />
-    <Folder Include="Views\About\" />
-    <Folder Include="Views\test\" />
     <Folder Include="Models\" />
     <Folder Include="Views\Movies\" />
     <Folder Include="Unit Testing\" />
-    <Folder Include="Views\Error\" />
     <Folder Include="Unit Testing\" />
   </ItemGroup>
   <ItemGroup>

@@ -12,8 +12,6 @@ namespace mvc_app.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
@@ -28,10 +26,27 @@ namespace mvc_app.Controllers
         {
             return View();
         }
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+
+        private readonly ILogger<HomeController> _logger;
+
+        public IActionResult Error(int? statusCode = null)
         {
+            if (statusCode == 404 || statusCode == 500)
+            {
+                //if (statusCode == 404 || statusCode == 500)
+                //{
+                var viewName = statusCode.ToString();
+                return View(viewName);
+                //}
+            }
+
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+
         }
+        //[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        //public IActionResult Error()
+        //{
+        //    return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        //}
     }
 }

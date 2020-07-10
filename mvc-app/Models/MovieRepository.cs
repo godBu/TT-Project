@@ -9,7 +9,7 @@ namespace mvc_app.Models
 {
     public class MovieRepository
     {
-        private string connectionString = @"User ID = sa;Password = 6yrtDfngiL93Bg;Initial catalog= Movies;Data Source=localhost, 1433;  ";
+        private string connectionString = @"User ID = sa;Password = Password12345;Initial catalog= Movies;Data Source=localhost, 1433;  ";
 
         public IDbConnection Connection
         {
@@ -35,7 +35,7 @@ namespace mvc_app.Models
         {
             using (IDbConnection dbConnection = Connection)
             {
-                string sQuery = @"SELECT * FROM MovieModel WHERE MovieID=@Id";
+                string sQuery = @"EXEC ViewMovieByID @MovieID=@id";
                 dbConnection.Open();
                 return dbConnection.Query<Movie>(sQuery, new { Id = id }).FirstOrDefault();
             }
@@ -46,7 +46,7 @@ namespace mvc_app.Models
         {
             using (IDbConnection dbConnection = Connection)
             {
-                string sQuery = @"INSERT INTO MovieModel(MovieID, Title, Genre, Rating, IMDbscore) VALUES(@MovieID, @Title, @Genre, @Rating, @IMDbscore)";
+                string sQuery = @"EXEC MovieAdd @MovieID = @MovieID, @Title = @Title, @Genre = @Genre, @Rating = @Rating, @ReleaseDate = @ReleaseDate, @IMDbScore = @IMDbScore";
                 dbConnection.Open();
                 dbConnection.Execute(sQuery, newMovie);
             }
@@ -57,7 +57,7 @@ namespace mvc_app.Models
         {
             using (IDbConnection dbConnection = Connection)
             {
-                string sQuery = @"EXEC MovieUpdate @MovieID = @MovieID, @Title = @Title, @Genre = @Genre, @Rating = @Rating, @IMDbScore = @IMDbScore";
+                string sQuery = @"EXEC MovieUpdate @MovieID = @MovieID, @Title = @Title, @Genre = @Genre, @Rating = @Rating, @ReleaseDate = @ReleaseDate, @IMDbScore = @IMDbScore";
                 dbConnection.Open();
                 dbConnection.Query(sQuery, newMovie);
             }

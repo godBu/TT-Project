@@ -46,11 +46,11 @@ namespace mvc_app.Controllers
             }
         }
 
-        [HttpPut("{id}")]
+        [HttpPut]
 
-        public void Put(int id, [FromBody] Movie newMovie)
+        public void Put([FromBody] Movie newMovie)
         {
-            newMovie.MovieID = id;
+            //newMovie.MovieID = id;
             if (ModelState.IsValid)
             {
                 movieRepository.UpdateMovies(newMovie);
